@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>Champions Leage Genigar</title>
+    <link rel="shortcut icon" href="~/Content/imgs/logo.png">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="shortcut icon" href="~/Content/gijgo.min.css">
+</head>
+<body>
+    <nav class="fixed-top navbar navbar-dark navbar-expand-md mb-4" id="mainNavbar">
+        <a href="/Home/Index" class="navbar-brand m-0 ml-1"><img src="~/Content/imgs/logo.png" class="shadow-lg bg-transparent" /></a>
+        @if (Session["FirstName"] != null)
+        {
+            <a href="/Customer/CustomersPage" class="nav-link d-md-none d-block" id="nameMobile">@Session["FirstName"]</a>
+        }
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navLinks" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navLinks">
+            <ul class="navbar-nav p-0">
+                <li class="nav-item"><a href="/Home/Index" class="nav-link">הימורים</a></li>
+                <li class="nav-item"><a href="/Customer/CustomersList" class="nav-link">טבלה</a></li>
+                <li class="nav-item"><a href="/Home/GameLive" class="nav-link">תוצאות LIVE</a></li>
+                <li class="nav-item"><a href="/Home/Tables" class="nav-link">נתונים</a></li>
+                @if (Session["FirstName"] != null && (string)Session["AdimCode"] == "Admin")
+                {
+                    <li class="nav-item"><a href="/Home/GamesUpdate" class="nav-link">עדכון תוצאות</a></li>
+                }
+            </ul>
+            @if (Session["FirstName"] != null)
+            {
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item d-none d-md-block" id="nameBig"><a href="/Customer/CustomersPage" class="nav-link ">@Session["FirstName"]</a></li>
+                    <li class="nav-item"><a href="/Account/Logout" class="nav-link">התנתק</a></li>
+                </ul>
+            }
+            else
+            {
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"><a href="/Account/Login" class="nav-link ">כניסה</a></li>
+                    <li class="nav-item"><a href="/Account/Register" class="nav-link">הרשמה</a></li>
+                </ul>
+            }
+        </div>
+    </nav>
+    <div>
+        <br />
+        @RenderBody()
+        <br />
+    </div>
+    <section id="footer">
+        <div class="container-fluid">
+            <div class="row ">
+                <div class="col-xs-12 col-sm-12 col-md-12  mt-sm-2 text-center text-white ">
+                    <p id="copyrights">
+                        &copy Champions Leage Bets. @DateTime.Now.Year | <a href="https://shahar-protfolio.herokuapp.com/"> Shahar Assenheim Software.</a>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    @section scripts{
+
+        <script src="~/Scripts/aos.js"></script>
+        <script>
+
+            AOS.init({
+                offset: 400,
+                duration: 1000,
+                easing: 'ease-in',
+                once: true,
+            });
+
+        </script>
+    }
+</body>
+</html>

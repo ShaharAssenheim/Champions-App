@@ -1,0 +1,86 @@
+﻿@using Champions.Models;
+@model  Tuple<List<Teams>, List<Players>>
+
+@{
+    /**/
+
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="@Url.Content("~/Content/themes/base/jquery-ui.min.css")" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="~/Content/dd.css" />
+
+
+
+<div class="row h-100">
+    <div id="Register" class="col-md-12">
+        <div id="spinner">
+            <img id="img-spinner" src="@Url.Content("~/Content/imgs/loader.gif")" alt="Loading..." />
+        </div>
+        
+        @using (Html.BeginForm("Create", "Customer"))
+        {
+    <div class="form-signin">
+        <br />
+        <br />
+        <h1 class="h3 mt-5 float-right font-weight-normal" style="color:white">נא מלא פרטים</h1>
+
+        <label for="inputUsername" class="sr-only">שם משתמש</label>
+        <input type="text" id="inputUsername" class="form-control" name="UserName" placeholder="שם משתמש" required oninvalid="this.setCustomValidity('הכנס שם משתמש')" oninput="this.setCustomValidity('')">
+
+        <label for="inputPassword" class="sr-only">סיסמה</label>
+        <input type="password" id="inputPassword" class="form-control" name="Password" placeholder="סיסמה" required oninvalid="this.setCustomValidity('הכנס סיסמא')" oninput="this.setCustomValidity('')">
+
+        <label for="inputEmail" class="sr-only">אימייל</label>
+        <input id="inputEmail" type="text" class="form-control" name="Email" placeholder="אימייל">
+
+        <div class="form-group">
+            <div class="input-group input-file" name="Fichier1">
+                <input id="imageInput" type="text" class="form-control" name="Image" placeholder='בחר תמונה...' />
+                <button id="imageBtn" class="btn btn-choose" type="button" style="background:#CACFD2; border-color:transparent; color:black">העלה</button>
+            </div>
+        </div>
+
+        <div class="mb-2">
+            <select id="WinTeam" name="WinTeam" class="float-right" style="width:100%;" onclick="this.size=2" required>
+                <option class="float-right" disabled selected value="">&nbsp בחר קבוצה - 20 נקודות</option>
+                @foreach (var item in Model.Item1)
+                {
+                    <option class="float-right" value="@item.Name" data-image="@item.Img">&nbsp @item.Name</option>
+                }
+            </select>
+        </div>
+
+        <div class="mb-2">
+            <select id="WinPlayer" name="WinPlayer" class="float-right" style="width:100%" required>
+                <option class="float-right" disabled selected value="">&nbsp בחר מלך שערים - 20 נקודות</option>
+                @foreach (var item in Model.Item2)
+                {
+                    <option class="float-right" value="@item.Name" data-image="@item.Img">&nbsp @item.Name</option>
+                }
+            </select>
+        </div>
+
+        <button style="background:#CACFD2; border-color:transparent; color:black" class="btn btn-lg btn-block" type="submit">הירשם</button>
+        <div class=" float-right" style="font-size:20px; color:white">
+            @ViewBag.Message
+        </div>
+    </div>
+        }
+    </div>
+</div>
+
+@section scripts{
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.12.1.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/imageUpload.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.dd.js")"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#WinTeam").msDropDown();
+            $("#WinPlayer").msDropDown();
+        });
+    </script>
+
+}

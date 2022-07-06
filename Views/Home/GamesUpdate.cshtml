@@ -1,0 +1,71 @@
+﻿@using Champions.Models;
+@model  List<GameModel>
+@{
+    ViewBag.Title = "GamesUpdate";
+}
+
+<div class="container-fluid px-0">
+    <div class="col-md-12">
+        <div class="form-signin">
+            <br />
+            <br />
+            <h1 class="h3 mt-5 text-center font-weight-normal" style="color:white">עידכון תוצאות</h1>
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <div class="container-fluid px-0 mt-4">
+                    <h5 class="text-center mb-0" style="color:white">@Model[i].Time.ToLongDateString() @Model[i].Time.ToShortTimeString()</h5>
+                    <div class="row justify-content-center ml-0 mr-0 ">
+                        <img class="col-2" src=@Model[i].Team1_img />
+                        <p class="col-2 mt-4 text-center" style="color:white">@Model[i].Team1</p>
+                        <input type="text" id="Team1_Goal" class="form-control col-1 mt-3" name="Team1_Goal" value="@Model[i].Team1_Goal">
+                        <label class=" col-1 ml-2 mt-4 text-center" style="color:white">X</label>
+                        <input type="text" class="form-control col-1 mt-3 " value="@Model[i].Team2_Goal">
+                        <p class=" mt-4 col-2 text-center" style="color:white">@Model[i].Team2</p>
+                        <img class="col-2" src=@Model[i].Team2_img />
+                    </div>
+                    <hr style="background-color:white">
+                </div>
+            }
+            <div style="display: flex; align-items: center; justify-content: center;">
+                <button id="SendBtn" type="submit">שמור תוצאות</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+
+    <script>
+
+        $('#SendBtn').click(function myFunction() {
+            var inputs = document.getElementsByTagName("input");
+            var props = [];
+            for (var i = 0; i < inputs.length; i = i + 2) {
+                if (inputs[i].type === "text")
+                    props.push({ "Team1_Goal": inputs[i].value, "Team2_Goal": inputs[i + 1].value });
+            }
+            SaveEvent(props);// call function for submit data to the server
+        })
+
+        //submit data to the server
+        function SaveEvent(data) {
+
+            $.ajax({
+                url: '/Home/SaveGameResult',
+                contentType: "application/json",
+                async: true,
+                type: "POST",
+                data: JSON.stringify(data),
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log("FAIL: " + errorThrown);
+                },
+                success: function (data, textStatus, jqXHR) {
+                    console.log("SUCCESS!");
+                    $("html, body").animate({ scrollTop: 0 }, "slow");
+                    return false;
+                }
+            });
+        }
+    </script>
+}

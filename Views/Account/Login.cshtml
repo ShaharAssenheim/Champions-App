@@ -1,0 +1,35 @@
+﻿@model Champions.Models.CustomerModel
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row justify-content-center h-100">
+    <div class="col-md-3 m-2">
+        @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            <form class="form-signin " method="POST">
+                <br />
+                <br />
+                <h1 class="h3 mb-3 mt-5 float-right font-weight-normal" style="color:white">כניסת משתמש</h1>
+                <label for="inputUsername" class="sr-only ">שם משתמש</label>
+                <input type="text" id="inputUsername" class="form-control mb-3" name="username" placeholder="שם משתמש" required oninvalid="this.setCustomValidity('הכנס שם משתמש')" oninput="this.setCustomValidity('')">
+                <label for="inputPassword" class="sr-only">סיסמה</label>
+                <input type="password" id="inputPassword" class="form-control mb-3" name="password" placeholder="סיסמה" required oninvalid="this.setCustomValidity('הכנס סיסמה')" oninput="this.setCustomValidity('')">
+
+                <button class="btn btn-lg btn-block" type="submit" style="background:#CACFD2; border-color:transparent; color:black">כניסה</button>
+            </form>
+            <div class="form-signin float-left">
+                <a href="/Account/ForgotPassword" style="color:white; font-weight: bold;">שכחת סיסמה?</a>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+

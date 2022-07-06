@@ -1,0 +1,349 @@
+﻿html {
+    position: relative;
+    min-height: 100%;
+    overflow-x: hidden;
+    overflow-y:hidden;
+}
+
+body {
+    background: url(imgs/back.jpg) no-repeat center center fixed;
+    background-size: cover;
+    font-family: "Nunito", sans-serif;
+    direction: rtl;
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    width: 100%;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/*Navbar*/
+
+#mainNavbar {
+    font-size: 1.5rem;
+    font-weight: 100;
+    background-image: linear-gradient(to top, #09203f 0%, #537895 100%);
+}
+
+    #mainNavbar .nav-link {
+        color: white;
+    }
+
+        #mainNavbar .nav-link:hover {
+            color: white;
+            transform: scale(1.2);
+            transition: 1.1s;
+        }
+
+    #mainNavbar .navbar-brand img {
+        height: 40px;
+        background-color: transparent;
+    }
+
+button:focus {
+    outline: 2px solid #cce7e8;
+}
+
+
+/*forms*/
+.form-signin {
+    width: 100%;
+    max-width: 700px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+#Register .form-signin {
+    width: 100%;
+    max-width: 500px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+.form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+    border-color: #cce7e8;
+    margin-bottom: 1rem;
+}
+
+    .form-control:focus {
+        border-color: #cce7e8;
+        box-shadow: 0 0 0 0.3rem #cce7e8;
+    }
+
+.form-signin input {
+    margin-bottom: 10px;
+    border-radius: 5px;
+    text-align: center;
+    padding: 1px;
+    max-height: 40px;
+    height: 40px;
+}
+
+.form-signin img {
+    max-height: 80px;
+    max-width: 100px;
+}
+
+#result {
+    background-color: white;
+    box-shadow: 0 0 30px 30px white;
+    margin-top: 150px;
+    margin-bottom: 80px;
+    opacity: 0.9
+}
+
+#score {
+    color: black;
+    border-radius: 50%;
+    font-size: 20px
+}
+
+/*footer*/
+#footer {
+    background-image: linear-gradient(to top, #09203f 0%, #537895 100%);
+    color: black;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    clear: both;
+}
+
+    #footer a {
+        color: white;
+        text-decoration: none !important;
+        background-color: transparent;
+    }
+
+    #footer #copyrights {
+        direction: ltr;
+        color: white
+    }
+
+.table {
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 15px;
+    width:50%;
+}
+
+.select {
+    width: 200px;
+}
+
+
+.card img {
+    display: inline-block;
+    float: none !important;
+    max-height: 40px;
+    max-width: 40px;
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.card p {
+    font-size: 20px;
+    color: black;
+}
+
+#imageInput {
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+}
+
+#imageBtn {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+}
+
+/*loading spinner*/
+#spinner {
+    width: 100%;
+    height: 100%;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    position: fixed;
+    display: block;
+    opacity: 0.7;
+    z-index: 99;
+    text-align: center;
+    display: none;
+}
+
+
+
+#img-spinner {
+    position: absolute;
+    z-index: 100;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-image: linear-gradient(to bottom, #cf556c 21%, #f99185 100%, #cf556c 78%, #b12a5b 100%);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.swiper-container {
+    width: 50%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    margin-bottom:100px;
+}
+
+
+@media (max-width: 768px) {
+    #result {
+        background-color: white;
+        box-shadow: 0 0 10px 10px white;
+        margin-top: 150px;
+        margin-bottom: 80px;
+        opacity: 0.9
+    }
+
+    .form-signin img {
+        display: inline-block;
+        float: none !important;
+        max-height: 40px;
+        max-width: 70px;
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    .form-signin input {
+        padding: 1px;
+
+    }
+
+    .form-signin p {
+        font-size: 12px;
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    .form-signin label {
+        font-size: 12px;
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    .swiper-container {
+        width: 80%;
+    }
+
+    .table {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+
+    #result {
+        background-color: white;
+        box-shadow: 0 0 10px 10px white;
+        margin-top: 150px;
+        margin-bottom: 80px;
+        opacity: 0.9
+    }
+
+    .form-signin img {
+        display: inline-block;
+        float: none !important;
+        max-height: 40px;
+        max-width: 70px;
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    .form-signin input {
+        padding: 1px;
+   
+    }
+
+    .form-signin p {
+        font-size: 12px;
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    .form-signin label {
+        font-size: 12px;
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    #score {
+        font-size: 15px;
+    }
+
+    .swiper-container {
+        width: 95%;
+    }
+
+    .card p {
+        font-size: 15px;
+        color: black;
+    }
+
+    .card img {
+        max-height: 30px;
+        max-width: 30px;
+    }
+
+    .card tr {
+        font-size: 11px;
+    }
+
+
+}
+
+#SendBtn {
+    display: block; /* Hidden by default */
+    position: fixed; /* Fixed/sticky position */
+    bottom: 100px; /* Place the button at the bottom of the page */
+    z-index: 99; /* Make sure it does not overlap */
+    border: none; /* Remove borders */
+    outline: none; /* Remove outline */
+    background-color: gray; /* Set a background color */
+    color: white; /* Text color */
+    cursor: pointer; /* Add a mouse pointer on hover */
+    padding: 15px; /* Some padding */
+    border-radius: 10px; /* Rounded corners */
+    font-size: 18px; /* Increase font size */
+    opacity: 0.5
+}
+
+    #SendBtn:hover {
+        opacity: 1; /* Add a dark-grey background on hover */
+    }

@@ -1,0 +1,104 @@
+﻿@using Champions.Models;
+@model  Tuple<CustomerModel, List<GameModel>>
+
+@{
+    ViewBag.Title = "CustomersPage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="@Url.Content("~/Content/customerPage.css")" rel="stylesheet" />
+
+<div class="container bootstrap snippet mt-5">
+    <div class="row mt-5">
+        <div class="col-sm-10"><h1 id="ProfileName" style="color:black">@Model.Item1.UserName </h1></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <!--left col-->
+
+            <div class="text-center">
+                <img src="@Model.Item1.Image" class="avatar img-circle img-thumbnail mb-2" alt="avatar">
+
+                <!-- COMPONENT START -->
+                <div class="form-group">
+                    <div class="input-group input-file" name="Fichier1">
+                        <input id="imageInput" type="text" class="form-control" name="Image" placeholder='בחר תמונה...' />
+                        <button id="imageBtn" class="btn btn-choose" type="button" style="background: #CACFD2; border-color: transparent; color: black">העלה</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="spinner">
+                <img id="img-spinner" src="@Url.Content("~/Content/imgs/loader.gif")" alt="Loading..." />
+            </div>
+
+        </div><!--/col-3-->
+        <div class="col-sm-9">
+            <ul class="nav nav-tabs mb-4 border-light">
+                <li class="active"><a data-toggle="tab" href="#home" class="nav-link ml-1" style="background: #CACFD2; border-color: transparent; color: black">פרטים אישיים</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="home">
+
+                    @using (Html.BeginForm("Edit", "Customer"))
+                    {
+                        <div class="form-group" style="display:none">
+                            <div class="col-xs-6">
+                                <h4 class="float-right" style="color:black">מספר משתמש</h4>
+                                <input type="text" class="form-control" name="ID" id="ID" value="@Model.Item1.ID">
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <h4 class="float-right" style="color:black">שם משתמש</h4>
+                                <input type="text" class="form-control" name="UserName" id="UserName" value="@Model.Item1.UserName" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <h4 class="float-right" style="color:black">אימייל</h4>
+                                <input type="email" class="form-control" name="Email" id="Email" value="@Model.Item1.Email" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <h4 class="float-right" style="color:black">קבוצה זוכה</h4>
+                                <input type="text" class="form-control" name="Password" id="Password" value="@Model.Item1.WinTeam" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <h4 class="float-right" style="color:black">מלך השערים</h4>
+                                <input type="text" class="form-control" name="Password" id="Password" value="@Model.Item1.WinPlayer - @Model.Item1.WinPlayerGoals נקודות" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <br>
+                                <button id="edit" class="btn btn-lg" type="reset" style="background: #CACFD2; border-color: transparent; color: black"> ערוך</button>
+                                <button class="btn btn-lg" type="submit" style="background: #CACFD2; border-color: transparent; color: black"> שמור</button>
+                            </div>
+                        </div>
+                    }
+                    <hr>
+                </div><!--/tab-pane-->
+            </div><!--/tab-pane-->
+        </div><!--/tab-content-->
+    </div><!--/col-9-->
+</div><!--/row-->
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#edit').click(function () {
+                $("#Email").removeAttr("readonly");
+                $("#Email").css('background-color', '#ECD393');
+            });
+        });
+
+
+    </script>
+}

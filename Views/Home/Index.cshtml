@@ -1,0 +1,137 @@
+﻿@using Champions.Models;
+@model  Tuple<List<User_Games>, List<GameModel>>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="container-fluid px-0">
+    <div class="col-md-12">
+        <div id="result" class="form-signin">
+            @{DateTime date = @TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.FindSystemTimeZoneById("Israel Standard Time")); }
+            <h3 class="text-center font-weight-normal" style="color:black">תוצאות</h3>
+            @for (int i = 0; i < Model.Item2.Count; i++)
+            {
+                if (Session["FirstName"] != null)
+                {
+                    string t1Bet;
+                    string t2Bet;
+
+                    <div class="container-fluid px-0 mt-4">
+                        <h5 class="text-center mb-1" style="color:black">@Model.Item2[i].Time.ToLongDateString() @Model.Item2[i].Time.ToShortTimeString()</h5>
+                        <div class="row justify-content-center ml-0 mr-0">
+                            <img class="col-2" src=@Model.Item2[i].Team1_img />
+                            <p class="col-2 mt-4 text-center" style="color:black">@Model.Item2[i].Team1<br />@Model.Item2[i].Team1_Score</p>
+                            @if ((Model.Item2[i].Time - date).TotalMinutes >= 30)
+                            {
+                                t1Bet = Model.Item1[i].Team1_Bet == -1 ? "" : Model.Item1[i].Team1_Bet.ToString();
+                                <input type="number" pattern="[0-9]*" inputmode="numeric" id="Team1_Bet" class="form-control col-1 mt-3" name="Team1_Bet" value="@t1Bet">
+                            }
+                            else
+                            {
+                                t1Bet = Model.Item1[i].Team1_Bet == -1 ? "-" : Model.Item1[i].Team1_Bet.ToString();
+                                <input type="number" pattern="[0-9]*" inputmode="numeric" disabled="disabled" class="form-control col-1 mt-3" value="@t1Bet">
+                            }
+                            <label class=" col-1 mt-4 text-center" style="color:black">X<br />@Model.Item2[i].Drow_Score</label>
+                            @if ((Model.Item2[i].Time - date).TotalMinutes >= 30)
+                            {
+                                t2Bet = Model.Item1[i].Team2_Bet == -1 ? "" : Model.Item1[i].Team2_Bet.ToString();
+                                <input type="number" pattern="[0-9]*" inputmode="numeric" id="Team2_Bet" class="form-control col-1 mt-3 " name="Team2_Bet" value="@t2Bet">
+                            }
+                            else
+                            {
+                                t2Bet = Model.Item1[i].Team2_Bet == -1 ? "-" : Model.Item1[i].Team2_Bet.ToString();
+                                <input type="number" pattern="[0-9]*" inputmode="numeric" disabled="disabled" class="form-control col-1 mt-3 " value="@t2Bet">
+                            }
+                            <p class=" mt-4 col-2 text-center" style="color:black">@Model.Item2[i].Team2<br />@Model.Item2[i].Team2_Score</p>
+                            <img class="col-2" src=@Model.Item2[i].Team2_img />
+                        </div>
+                        <div class="row justify-content-center ml-0 mr-0 mt-2">
+                            <input type="number" pattern="[0-9]*" inputmode="numeric" id="Team1_Goal" disabled="disabled" class="form-control col-1" name="Team1_Goal" value="@Model.Item2[i].Team1_Goal">
+                            @if (@Model.Item1[i].Score > 0 && (Model.Item2[i].Time - date).TotalMinutes < 0)
+                            {
+                                <label id="score" class=" col-1 ml-2 mr-2 text-center pr-0 pl-0 pt-1" style="background-color: lightgreen;">@Model.Item1[i].Score+</label>
+                            }
+                            else if (@Model.Item1[i].Score <= 0 && (Model.Item2[i].Time - date).TotalMinutes < 0)
+                            {
+                                <label id="score" class=" col-1 ml-2 mr-2 text-center pr-0 pl-0 pt-1" style="background-color:orangered;">@Model.Item1[i].Score</label>
+                            }
+                            else
+                            {
+                                <label id="score" class=" col-1 ml-2 mr-2 text-center pr-0 pl-0 pt-1" style="background-color:transparent;">@Model.Item1[i].Score</label>
+                            }
+                            <input type="number" pattern="[0-9]*" inputmode="numeric" id="Team1_Goal" disabled="disabled" class="form-control col-1" value="@Model.Item2[i].Team2_Goal">
+                        </div>
+                        <hr style="background-color:white">
+                    </div>
+                }
+                else
+                {
+                    <div class="container-fluid px-0 mt-4">
+                        <h5 class="text-center mb-4" style="color:black">@Model.Item2[i].Time.ToLongDateString() @Model.Item2[i].Time.ToShortTimeString()</h5>
+                        <div class="row justify-content-center ml-0 mr-0 mb-1">
+                            <img class="col-2" src=@Model.Item2[i].Team1_img />
+                            <p class="col-2 mt-4 text-center" style="color:black">@Model.Item2[i].Team1<br />@Model.Item2[i].Team1_Score</p>
+                            <input type="number" pattern="[0-9]*" inputmode="numeric" id="Team1_Goal" disabled="disabled" class="form-control col-1 mt-3" name="Team1_Goal" value="@Model.Item2[i].Team1_Goal">
+                            <label class=" col-1 mt-4 text-center" style="color:black">X<br />@Model.Item2[i].Drow_Score</label>
+                            <input type="number" pattern="[0-9]*" inputmode="numeric" disabled="disabled" class="form-control col-1 mt-3 " value="@Model.Item2[i].Team2_Goal">
+                            <p class=" mt-4 col-2 text-center" style="color:black">@Model.Item2[i].Team2<br />@Model.Item2[i].Team2_Score</p>
+                            <img class="col-2" src=@Model.Item2[i].Team2_img />
+                        </div>
+                        <hr style="background-color:white">
+                    </div>
+                }
+            }
+
+            @if (Session["FirstName"] != null)
+            {
+                <div style="display: flex; align-items: center; justify-content: center;">
+                    <button id="SendBtn" type="submit">שלח תוצאות</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+
+    <script>
+
+        $('html, body').animate({ scrollTop: $('#Team1_Bet').offset().top - 300 }, "slow");
+
+        $('#SendBtn').click(function myFunction() {
+            var inputs = document.getElementsByTagName("input");
+            var props = [];
+            for (var i = 0; i < inputs.length; i = i + 4) {
+                if (inputs[i].type === "number") {
+                    var one = (inputs[i].value == "-" || inputs[i].value == "") ? - 1 : inputs[i].value;
+                    var tow = (inputs[i + 1].value == "-" || inputs[i + 1].value == "") ? - 1 : inputs[i + 1].value;
+                    props.push({ "Team1_Bet": one, "Team2_Bet": tow });
+                }
+            }
+            SaveEvent(props);// call function for submit data to the server
+        })
+
+        //submit data to the server
+        function SaveEvent(data) {
+
+            $.ajax({
+                url: '/Home/SaveUserGame',
+                contentType: "application/json",
+                async: true,
+                type: "POST",
+                data: JSON.stringify(data),
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log("FAIL: " + errorThrown);
+                },
+                success: function (data, textStatus, jqXHR) {
+                    if (data.status) {
+                        console.log("SUCCESS!");
+                        $('html, body').animate({ scrollTop: $('#Team1_Bet').offset().top - 300 }, "slow");
+                    }
+                }
+            });
+        }
+
+    </script>
+}
